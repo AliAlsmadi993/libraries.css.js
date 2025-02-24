@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>p5.js Creative Example</title>
+  <!-- Include p5.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+<script>
+  let angle = 0;
+  let radius = 0;
+  
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(0);
+    strokeWeight(2);
+  }
+  
+  function draw() {
+    translate(width / 2, height / 2);
+    
+    // Calculate coordinates for current angle and radius
+    let x = radius * cos(angle);
+    let y = radius * sin(angle);
+    
+    // Choose a random vibrant color for each line segment
+    stroke(random(100, 255), random(100, 255), random(100, 255));
+    
+    // Draw a line from the center to the computed point
+    line(0, 0, x, y);
+    
+    // Increment angle and radius to create a spiral effect
+    angle += 0.1;
+    radius += 0.5;
+    
+    // Gradually fade the background to create a trailing effect
+    fill(0, 20);
+    noStroke();
+    rect(-width/2, -height/2, width, height);
+  }
+  
+  // Adjust canvas size on window resize
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+</script>
+</body>
+</html>

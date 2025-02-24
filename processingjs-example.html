@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Processing.js Creative Example</title>
+  <!-- Include Processing.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.8/processing.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas element without explicit width/height attributes -->
+  <canvas id="processing-canvas"></canvas>
+  <script type="text/processing" data-processing-target="processing-canvas">
+    float t = 0;
+    int numSymmetry = 12; // Number of symmetrical divisions
+
+    void setup() {
+      // Set canvas size to full window dimensions
+      size((int)window.innerWidth, (int)window.innerHeight);
+      // Use HSB mode for smooth hue transitions
+      colorMode(HSB, 360, 100, 100, 100);
+      smooth();
+      frameRate(30);
+      background(0);
+      noFill();
+      strokeWeight(2);
+    }
+    
+    void draw() {
+      // Create a trailing effect with a semi-transparent overlay
+      fill(0, 0, 0, 10);
+      rect(0, 0, width, height);
+      noFill();
+      
+      // Translate origin to the center of the canvas
+      translate(width/2, height/2);
+      
+      // Set radius relative to the smallest dimension
+      float radius = min(width, height) * 0.25;
+      // Draw symmetrical arcs
+      for (int i = 0; i < numSymmetry; i++) {
+        pushMatrix();
+        rotate(TWO_PI / numSymmetry * i);
+        // Set stroke color varying with time and symmetry index
+        stroke((t * 60 + i * 30) % 360, 80, 100, 80);
+        
+        // Begin drawing an evolving arc shape
+        beginShape();
+        for (float angle = 0; angle < PI; angle += 0.05) {
+          // Dynamic radius with sinusoidal and noise-based variation
+          float r = radius + 50 * sin(angle * 3 + t) + 20 * noise(angle, t);
+          float x = r * cos(angle);
+          float y = r * sin(angle);
+          vertex(x, y);
+        }
+        endShape();
+        popMatrix();
+      }
+      
+      t += 0.02; // Increment time to evolve the pattern
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Two.js Example</title>
+  <!-- Include Two.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.7.0/two.min.js"></script>
+  <style>
+    body { margin: 0; padding: 0; overflow: hidden; background: #222; }
+    #draw { display: block; }
+  </style>
+</head>
+<body>
+  <div id="draw"></div>
+  <script>
+    // Create a Two.js instance and attach it to the 'draw' div
+    var elem = document.getElementById('draw');
+    var params = { width: window.innerWidth, height: window.innerHeight };
+    var two = new Two(params).appendTo(elem);
+    
+    // Create an array of circles centered in the view
+    var circles = [];
+    var centerX = two.width / 2, centerY = two.height / 2;
+    for (var i = 0; i < 10; i++) {
+      var circle = two.makeCircle(centerX, centerY, 20 + i * 10);
+      circle.fill = 'hsl(' + (i * 36) + ', 100%, 50%)';
+      circle.noStroke();
+      circles.push(circle);
+    }
+    
+    // Animate each circle: rotate and scale with a sine wave effect
+    two.bind('update', function(frameCount) {
+      circles.forEach(function(circle, i) {
+        circle.rotation += 0.01 * (i + 1);
+        circle.scale = 1 + 0.3 * Math.sin(frameCount * 0.02 + i);
+      });
+    });
+    
+    two.play();
+  </script>
+</body>
+</html>

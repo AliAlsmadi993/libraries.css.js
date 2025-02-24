@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Less Example - مقارنة الكود</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background: #fdfdfd;
+      text-align: center;
+    }
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+    .box {
+      margin: 20px auto;
+      width: 300px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .box:hover {
+      transform: scale(1.1);
+    }
+    pre {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      padding: 10px;
+      white-space: pre-wrap;
+      text-align: left;
+      margin: 10px auto;
+      max-width: 90%;
+      overflow-x: auto;
+    }
+  </style>
+  <!-- تضمين Less.js من CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/less@4.1.3/dist/less.min.js"></script>
+</head>
+<body>
+  <h1>مثال Less مع مقارنة الكود</h1>
+  
+  <!-- المربع الذي سيتم تطبيق النمط عليه -->
+  <div id="box" class="box">مرحباً Less!</div>
+  
+  <!-- عرض الكود الأصلي -->
+  <h2>الكود الأصلي (Less):</h2>
+  <pre id="originalCode">
+@primary-color: #e74c3c;
+@padding: 20px;
+
+#box {
+  background-color: @primary-color;
+  padding: @padding;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+  </pre>
+  
+  <!-- عرض الكود المعالج (CSS) -->
+  <h2>الكود المعالج (CSS):</h2>
+  <pre id="processedCode">...جاري المعالجة...</pre>
+  
+  <!-- كود Less داخل وسم script من نوع text/less -->
+  <script type="text/less">
+@primary-color: #e74c3c;
+@padding: 20px;
+
+#box {
+  background-color: @primary-color;
+  padding: @padding;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+  </script>
+  
+  <script>
+    // انتظر تحميل DOM ثم معالجة كود Less
+    document.addEventListener("DOMContentLoaded", function() {
+      // الحصول على كود Less من وسم <script type="text/less">
+      var lessCode = document.querySelector('script[type="text/less"]').textContent;
+      // معالجة Less وتحويله إلى CSS
+      less.render(lessCode)
+        .then(function(output) {
+          // إضافة CSS الناتج إلى صفحة الويب
+          var style = document.createElement('style');
+          style.innerHTML = output.css;
+          document.head.appendChild(style);
+          // عرض الكود المعالج في عنصر pre
+          document.getElementById('processedCode').textContent = output.css;
+        })
+        .catch(function(err) {
+          console.error("خطأ في معالجة Less:", err);
+          document.getElementById('processedCode').textContent = "خطأ في معالجة Less: " + err;
+        });
+    });
+  </script>
+</body>
+</html>

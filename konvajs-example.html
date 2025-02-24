@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Konva.js Example</title>
+  <!-- Include Konva.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/konva/8.3.5/konva.min.js"></script>
+  <style>
+    body { margin: 0; padding: 0; background: #f0f0f0; }
+    #container { width: 100%; height: 100vh; }
+  </style>
+</head>
+<body>
+  <!-- Container for the Konva stage -->
+  <div id="container"></div>
+  <script>
+    // Create a Konva stage and layer
+    var stage = new Konva.Stage({
+      container: 'container',
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+    
+    // Add a draggable circle to the center
+    var circle = new Konva.Circle({
+      x: stage.width() / 2,
+      y: stage.height() / 2,
+      radius: 50,
+      fill: '#00aaff',
+      stroke: '#333',
+      strokeWidth: 4,
+      draggable: true
+    });
+    layer.add(circle);
+    
+    // Add a rectangle that rotates continuously and is draggable
+    var rect = new Konva.Rect({
+      x: 100,
+      y: 100,
+      width: 150,
+      height: 100,
+      fill: '#ffcc00',
+      stroke: '#333',
+      strokeWidth: 4,
+      draggable: true
+    });
+    layer.add(rect);
+    
+    // Animate the rectangle's rotation
+    var anim = new Konva.Animation(function(frame) {
+      rect.rotate(0.02 * frame.timeDiff);
+    }, layer);
+    anim.start();
+    
+    // Add a text element to display pointer coordinates
+    var text = new Konva.Text({
+      x: 20,
+      y: 20,
+      text: 'Drag the shapes!',
+      fontSize: 24,
+      fontFamily: 'Calibri',
+      fill: 'black'
+    });
+    layer.add(text);
+    
+    // Update text with pointer position on drag
+    stage.on('dragmove', function() {
+      var pos = stage.getPointerPosition();
+      text.text('X: ' + Math.round(pos.x) + ', Y: ' + Math.round(pos.y));
+      layer.batchDraw();
+    });
+    
+    layer.draw();
+  </script>
+</body>
+</html>

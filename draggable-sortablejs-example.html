@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Draggable & Sortable.js Example</title>
+  <!-- Include Sortable.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+  <style>
+    body {
+      margin: 20px;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    h1 { margin-bottom: 20px; }
+    #sortable-list {
+      list-style: none;
+      padding: 0;
+      max-width: 400px;
+      margin: auto;
+    }
+    #sortable-list li {
+      padding: 15px;
+      margin: 5px 0;
+      background: #007BFF;
+      color: white;
+      border-radius: 4px;
+      cursor: grab;
+    }
+    #sortable-list li:active { cursor: grabbing; }
+  </style>
+</head>
+<body>
+  <h1>Draggable & Sortable.js Example</h1>
+  <ul id="sortable-list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+  </ul>
+  <script>
+    new Sortable(document.getElementById('sortable-list'), {
+      animation: 150,
+      ghostClass: 'sortable-ghost'
+    });
+  </script>
+</body>
+</html>

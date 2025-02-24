@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animate.css Example</title>
+  <!-- Include Animate.css from CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #e9ecef;
+      margin: 0;
+    }
+    /* Style for the animated text */
+    #animateText {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    /* Style for the trigger button */
+    #triggerBtn {
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated text and trigger button -->
+  <div id="animateText" class="animate__animated">Hello, World!</div>
+  <button id="triggerBtn">Run Animation</button>
+  <script>
+    // On button click, apply a random animation effect to the text
+    document.getElementById("triggerBtn").addEventListener("click", function() {
+      const textElem = document.getElementById("animateText");
+      // Remove any existing animation classes
+      textElem.classList.remove("animate__bounce", "animate__heartBeat");
+      // Define available animation effects
+      const effects = ["animate__bounce", "animate__heartBeat"];
+      // Randomly select an effect
+      const effect = effects[Math.floor(Math.random() * effects.length)];
+      textElem.classList.add(effect);
+      // Remove the class after animation ends to allow replay
+      textElem.addEventListener('animationend', function() {
+        textElem.classList.remove(effect);
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>

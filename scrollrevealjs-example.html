@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScrollReveal.js Example</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: white;
+      text-align: center;
+    }
+    .section:nth-child(1) {
+      background-color: #007BFF;
+    }
+    .section:nth-child(2) {
+      background-color: #28a745;
+    }
+    .section:nth-child(3) {
+      background-color: #dc3545;
+    }
+    .section:nth-child(4) {
+      background-color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <h1>Welcome to Section 1</h1>
+  </div>
+  <div class="section">
+    <h1>Welcome to Section 2</h1>
+  </div>
+  <div class="section">
+    <h1>Welcome to Section 3</h1>
+  </div>
+  <div class="section">
+    <h1>Welcome to Section 4</h1>
+  </div>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    ScrollReveal().reveal('.section', {
+      delay: 300,
+      distance: '50px',
+      duration: 1000,
+      easing: 'ease-in-out',
+      reset: true,
+      opacity: 0,
+      scale: 0.9,
+      origin: 'bottom',
+      interval: 200,
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>مثال PostCSS - نتيجة معالجة مسبقة</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background: #fdfdfd;
+      text-align: center;
+    }
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+    .box {
+      margin: 20px auto;
+      width: 300px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .box:hover {
+      transform: scale(1.1);
+    }
+    pre {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      padding: 10px;
+      white-space: pre-wrap;
+      text-align: left;
+      margin: 10px auto;
+      max-width: 90%;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+  </style>
+  <!-- هنا نقوم بتضمين الكود المعالج مسبقًا بواسطة PostCSS مع Autoprefixer -->
+  <style>
+    /* الكود المعالج (Processed CSS) */
+    #postcssBox {
+      background-color: #2ecc71;
+      padding: 20px;
+      border-radius: 8px;
+      color: white;
+      text-align: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      transition: transform 0.3s;
+    }
+    #postcssBox:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>مثال PostCSS مع Autoprefixer</h1>
+  <p>يُظهر المثال الفرق بين الكود الأصلي وكود CSS المعالج (الذي تمت معالجته خارجيًا باستخدام PostCSS وAutoprefixer).</p>
+  
+  <!-- المربع الذي سيتم تطبيق النمط عليه -->
+  <div id="postcssBox" class="box">PostCSS Box</div>
+  
+  <h2>الكود الأصلي (CSS):</h2>
+  <pre>
+#postcssBox {
+  background-color: #2ecc71;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  user-select: none;
+  transition: transform 0.3s;
+}
+#postcssBox:hover {
+  transform: scale(1.1);
+}
+  </pre>
+  
+  <h2>الكود المعالج (Processed CSS):</h2>
+  <pre>
+#postcssBox {
+  background-color: #2ecc71;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: transform 0.3s;
+}
+#postcssBox:hover {
+  transform: scale(1.1);
+}
+  </pre>
+  
+  <p>ملاحظة: تم معالجة الكود باستخدام PostCSS مع Autoprefixer خارج المتصفح، ثم تم تضمينه مباشرةً في الصفحة.</p>
+</body>
+</html>

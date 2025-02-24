@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime.js Example</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: #007BFF;
+      border-radius: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    const box = document.getElementById('box');
+    const animation = anime({
+      targets: box,
+      translateX: 250,
+      translateY: 250,
+      rotate: '1turn',
+      scale: 1.5,
+      duration: 1000,
+      easing: 'easeInOutQuad',
+      direction: 'alternate',
+      loop: true,
+      autoplay: false,
+    });
+
+    box.addEventListener('click', () => {
+      animation.play();
+    });
+  </script>
+</body>
+</html>

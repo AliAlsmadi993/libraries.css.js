@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Velocity.js Example</title>
+  <!-- Include Velocity.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f4f4;
+      margin: 0;
+    }
+    /* Style for the animated box */
+    #animateBox {
+      width: 150px;
+      height: 150px;
+      background-color: #007BFF;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 150px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <!-- Clickable box element -->
+  <div id="animateBox">Click Me</div>
+  <script>
+    // On click, execute a sequence of animations using Velocity.js
+    document.getElementById("animateBox").addEventListener("click", function() {
+      // First: move right while fading out
+      Velocity(this, { translateX: "200px", opacity: 0.5 }, { duration: 1000, easing: "easeInOutQuad" })
+      // Then: rotate and scale up
+      .then(() => {
+        return Velocity(this, { rotateZ: "360deg", scale: 1.5 }, { duration: 1000, easing: "spring" });
+      })
+      // Finally: return to original state
+      .then(() => {
+        return Velocity(this, { translateX: "0px", opacity: 1, rotateZ: "0deg", scale: 1 }, { duration: 1000, easing: "easeInOutQuad" });
+      });
+    });
+  </script>
+</body>
+</html>

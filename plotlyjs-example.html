@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plotly.js Example</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body { margin: 20px; font-family: sans-serif; text-align: center; }
+    #plotlyDiv { width: 800px; height: 600px; margin: auto; }
+  </style>
+</head>
+<body>
+  <h1>Plotly.js Example: Dynamic Scatter Plot</h1>
+  <div id="plotlyDiv"></div>
+  <script>
+    function generateData() {
+      var x = Array.from({length: 50}, (_, i) => i);
+      var y = Array.from({length: 50}, () => Math.random() * 100);
+      return { x: x, y: y, mode: 'markers', type: 'scatter' };
+    }
+    
+    var data = [generateData()];
+    Plotly.newPlot('plotlyDiv', data, { title: 'Dynamic Scatter Plot' });
+    
+    setInterval(function(){
+      var newData = generateData();
+      Plotly.react('plotlyDiv', [newData], { title: 'Dynamic Scatter Plot' });
+    }, 2000);
+  </script>
+</body>
+</html>

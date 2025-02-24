@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All JavaScript & CSS Libraries</title>
+  <style>
+    /* --- CSS Styling --- */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      direction: ltr;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 40px;
+    }
+    h2.category-title {
+      font-size: 1.8em;
+      color: #007BFF;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #007BFF;
+      padding-bottom: 10px;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 20px;
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .card h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #007BFF;
+    }
+    .card p {
+      font-size: 1em;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .card .explanation {
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .card .btn {
+      display: inline-block;
+      margin: 5px 5px 5px 0;
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 0.9em;
+      transition: background-color 0.3s ease;
+    }
+    .card .btn:hover {
+      background-color: #0056b3;
+    }
+    .card .btn-example {
+      background-color: #28a745; /* Green color for example button */
+    }
+    .card .btn-example:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <iframe src="3dname.html" width="100%" height="500" style="border: none;"></iframe>
+
+    <h1>JavaScript & CSS Libraries</h1>
+    
+    <!-- UI Frameworks -->
+    <h2 class="category-title">UI Frameworks</h2>
+    <div class="cards-container" id="ui-frameworks"></div>
+    
+    <!-- Animation Libraries -->
+    <h2 class="category-title">Animation Libraries</h2>
+    <div class="cards-container" id="animation-libraries"></div>
+    
+    <!-- Canvas & SVG Libraries -->
+    <h2 class="category-title">Canvas & SVG Libraries</h2>
+    <div class="cards-container" id="graphics-libraries"></div>
+    
+    <!-- Creative Libraries -->
+    <h2 class="category-title">Creative Libraries</h2>
+    <div class="cards-container" id="creative-libraries"></div>
+    
+    <!-- Data Visualization Libraries -->
+    <h2 class="category-title">Data Visualization Libraries</h2>
+    <div class="cards-container" id="data-viz-libraries"></div>
+    
+    <!-- Icon Libraries -->
+    <h2 class="category-title">Icon Libraries</h2>
+    <div class="cards-container" id="icon-libraries"></div>
+    
+    <!-- Layout & Drag/Drop Libraries -->
+    <h2 class="category-title">Layout & Drag/Drop Libraries</h2>
+    <div class="cards-container" id="layout-libraries"></div>
+    
+    <!-- 3D & WebGL Libraries -->
+    <h2 class="category-title">3D & WebGL Libraries</h2>
+    <div class="cards-container" id="3d-libraries"></div>
+    
+    <!-- Map Libraries -->
+    <h2 class="category-title">Map Libraries</h2>
+    <div class="cards-container" id="map-libraries"></div>
+    
+    <!-- Utility Libraries -->
+    <h2 class="category-title">Utility Libraries</h2>
+    <div class="cards-container" id="utility-libraries"></div>
+  </div>
+
+  <script>
+    /* --- JavaScript Data --- */
+    const libraries = [
+      // UI Frameworks
+      {
+        category: "ui-frameworks",
+        title: "Bootstrap",
+        description: "A popular framework for building responsive, mobile-first websites.",
+        docs: "https://getbootstrap.com/docs",
+        explanation: "Bootstrap provides ready-made components and a grid system that helps in quickly designing responsive websites.",
+        example: "bootstrap-example.html"
+      },
+      {
+        category: "ui-frameworks",
+        title: "Tailwind CSS",
+        description: "A utility-first CSS framework for rapid UI development.",
+        docs: "https://tailwindcss.com/docs",
+        explanation: "Tailwind CSS uses utility classes to style elements directly in HTML, offering high customization and faster development.",
+        example: "tailwind-example.html"
+      },
+      {
+        category: "ui-frameworks",
+        title: "Bulma",
+        description: "A modern CSS framework based on Flexbox.",
+        docs: "https://bulma.io/documentation/",
+        explanation: "Bulma utilizes Flexbox to create responsive and modern designs with simplicity and ease of use.",
+        example: "bulma-example.html"
+      },
+      {
+        category: "ui-frameworks",
+        title: "Semantic UI",
+        description: "A framework with natural language classes for building responsive layouts.",
+        docs: "https://semantic-ui.com/introduction/getting-started.html",
+        explanation: "Semantic UI uses natural language classes that make the code more intuitive, helping build consistent and responsive interfaces.",
+        example: "semantic-ui-example.html"
+      },
+      {
+        category: "ui-frameworks",
+        title: "Materialize CSS",
+        description: "A CSS framework based on Material Design principles.",
+        docs: "https://materializecss.com/getting-started.html",
+        explanation: "Materialize CSS is based on Google's Material Design principles, offering a modern look with interactive animations.",
+        example: "materialize-example.html"
+      },
+      {
+        category: "ui-frameworks",
+        title: "Foundation",
+        description: "An advanced responsive front-end framework.",
+        docs: "https://get.foundation/sites/docs/",
+        explanation: "Foundation is an advanced framework focused on building responsive websites with extensive features for developers.",
+        example: "foundation-example.html"
+      },
+      {
+        category: "ui-frameworks",
+        title: "UIkit",
+        description: "A lightweight and modular front-end framework.",
+        docs: "https://getuikit.com/docs",
+        explanation: "UIkit is a lightweight, modular framework that provides customizable components for creating responsive designs.",
+        example: "uikit-example.html"
+      },
+
+      // Animation Libraries
+      {
+        category: "animation-libraries",
+        title: "GSAP",
+        description: "A powerful library for creating smooth animations.",
+        docs: "https://greensock.com/docs/",
+        explanation: "GSAP offers advanced tools to create smooth, high-performance animations for web applications.",
+        example: "gsap-example.html"
+      },
+      {
+        category: "animation-libraries",
+        title: "Anime.js",
+        description: "A lightweight library for creating attractive animations.",
+        docs: "https://animejs.com/documentation/",
+        explanation: "Anime.js is a lightweight library for crafting intricate animations in a simple and flexible manner.",
+        example: "animejs-example.html"
+      },
+      {
+        category: "animation-libraries",
+        title: "Velocity.js",
+        description: "An animation engine with advanced features.",
+        docs: "http://velocityjs.org/",
+        explanation: "Velocity.js combines the simplicity of jQuery with performance enhancements to deliver smooth CSS and SVG animations.",
+        example: "velocityjs-example.html"
+      },
+      {
+        category: "animation-libraries",
+        title: "Mo.js",
+        description: "A motion graphics library for the web.",
+        docs: "https://mojs.github.io/",
+        explanation: "Mo.js specializes in motion graphics, delivering innovative visual effects for dynamic web designs.",
+        example: "mojs-example.html"
+      },
+      {
+        category: "animation-libraries",
+        title: "Animate.css",
+        description: "A library of ready-to-use CSS animations.",
+        docs: "https://animate.style/",
+        explanation: "Animate.css provides a collection of pre-built CSS animations that can be applied easily to elements without extra coding.",
+        example: "animate-css-example.html"
+      },
+      {
+        category: "animation-libraries",
+        title: "ScrollReveal.js",
+        description: "Animate elements as they scroll into view.",
+        docs: "https://scrollrevealjs.org/",
+        explanation: "ScrollReveal.js allows you to animate elements as they enter the viewport, enhancing user experience and visual appeal.",
+        example: "scrollrevealjs-example.html"
+      },
+
+      // Canvas & SVG Libraries
+      {
+        category: "graphics-libraries",
+        title: "Paper.js",
+        description: "A vector graphics scripting framework for HTML5 Canvas.",
+        docs: "http://paperjs.org/reference/",
+        explanation: "Paper.js simplifies working with HTML5 Canvas by providing tools for vector graphics scripting and manipulation.",
+        example: "paperjs-example.html"
+      },
+      {
+        category: "graphics-libraries",
+        title: "Snap.svg",
+        description: "A JavaScript library for working with SVG.",
+        docs: "http://snapsvg.io/docs/",
+        explanation: "Snap.svg is a robust library for creating, manipulating, and animating SVG graphics easily.",
+        example: "snapsvg-example.html"
+      },
+      {
+        category: "graphics-libraries",
+        title: "Two.js",
+        description: "A two-dimensional drawing library for modern browsers.",
+        docs: "https://two.js.org/",
+        explanation: "Two.js makes it easy to draw 2D shapes and graphics with a simple API for modern browsers.",
+        example: "twojs-example.html"
+      },
+      {
+        category: "graphics-libraries",
+        title: "Fabric.js",
+        description: "A powerful and simple HTML5 canvas library.",
+        docs: "http://fabricjs.com/docs/",
+        explanation: "Fabric.js provides an easy-to-use interface for handling Canvas elements with support for dynamic interactivity and modifications.",
+        example: "fabricjs-example.html"
+      },
+      {
+        category: "graphics-libraries",
+        title: "SVG.js",
+        description: "A lightweight library for manipulating and animating SVG.",
+        docs: "https://svgjs.dev/docs/3.0/",
+        explanation: "SVG.js is a lightweight library for manipulating and animating SVG elements with a focus on performance and ease of use.",
+        example: "svgjs-example.html"
+      },
+      {
+        category: "graphics-libraries",
+        title: "Konva.js",
+        description: "A 2D canvas library for desktop and mobile applications.",
+        docs: "https://konvajs.org/docs/",
+        explanation: "Konva.js is designed for creating interactive 2D applications using Canvas, supporting rich graphics and user interactions.",
+        example: "konvajs-example.html"
+      },
+
+      // Creative Libraries
+      {
+        category: "creative-libraries",
+        title: "p5.js",
+        description: "A JavaScript library for creative coding.",
+        docs: "https://p5js.org/reference/",
+        explanation: "p5.js is built for creative coding, enabling artists and developers to create interactive graphics and visual experiences on the web.",
+        example: "p5js-example.html"
+      },
+      {
+        category: "creative-libraries",
+        title: "Processing.js",
+        description: "A JavaScript port of the Processing language for visual arts.",
+        docs: "http://processingjs.org/reference/",
+        explanation: "Processing.js brings the power of the Processing language to the browser, allowing for creative visual art and interactive graphics using JavaScript.",
+        example: "processingjs-example.html"
+      },
+
+      // Data Visualization Libraries
+      {
+        category: "data-viz-libraries",
+        title: "D3.js",
+        description: "A library for producing dynamic, interactive data visualizations in web browsers.",
+        docs: "https://d3js.org/",
+        explanation: "D3.js uses data to create dynamic, interactive visualizations, offering complete control over every aspect of your graphics.",
+        example: "d3js-example.html"
+      },
+      {
+        category: "data-viz-libraries",
+        title: "Chart.js",
+        description: "A simple yet flexible JavaScript charting library.",
+        docs: "https://www.chartjs.org/docs/latest/",
+        explanation: "Chart.js is an easy-to-use library for creating interactive charts and graphs with simple configuration options.",
+        example: "chartjs-example.html"
+      },
+      {
+        category: "data-viz-libraries",
+        title: "C3.js",
+        description: "A D3-based reusable chart library.",
+        docs: "https://c3js.org/gettingstarted.html",
+        explanation: "C3.js builds on D3.js to provide reusable chart components with simplified configuration for creating beautiful visualizations.",
+        example: "c3js-example.html"
+      },
+      {
+        category: "data-viz-libraries",
+        title: "Highcharts",
+        description: "A charting library written in pure JavaScript.",
+        docs: "https://api.highcharts.com/highcharts/",
+        explanation: "Highcharts is a comprehensive charting library that delivers interactive graphs and a wide range of chart types for professional data presentation.",
+        example: "highcharts-example.html"
+      },
+      {
+        category: "data-viz-libraries",
+        title: "Plotly.js",
+        description: "A high-level, declarative charting library.",
+        docs: "https://plotly.com/javascript/",
+        explanation: "Plotly.js offers a high-level interface for creating attractive, interactive charts and visualizations with minimal code.",
+        example: "plotlyjs-example.html"
+      },
+
+      // Icon Libraries
+      {
+        category: "icon-libraries",
+        title: "Font Awesome",
+        description: "A comprehensive library of icons.",
+        docs: "https://fontawesome.com/docs",
+        explanation: "Font Awesome provides a comprehensive collection of customizable icons to enhance user interfaces.",
+        example: "fontawesome-example.html"
+      },
+      {
+        category: "icon-libraries",
+        title: "Ionicons",
+        description: "A set of beautiful icons for web and mobile apps.",
+        docs: "https://ionicons.com/",
+        explanation: "Ionicons offers a set of modern, attractive icons suitable for both web and mobile applications.",
+        example: "ionicons-example.html"
+      },
+      {
+        category: "icon-libraries",
+        title: "Feather Icons",
+        description: "A collection of simply beautiful open source icons.",
+        docs: "https://feathericons.com/",
+        explanation: "Feather Icons delivers a collection of simple, elegant open-source icons that can be easily customized.",
+        example: "feathericons-example.html"
+      },
+      {
+        category: "icon-libraries",
+        title: "Material Icons",
+        description: "Icons based on Google's Material Design.",
+        docs: "https://fonts.google.com/icons",
+        explanation: "Material Icons, inspired by Google's Material Design, offer a consistent set of icons for web applications.",
+        example: "material-icons-example.html"
+      },
+      {
+        category: "icon-libraries",
+        title: "Boxicons",
+        description: "A simple vector icons set for designers and developers.",
+        docs: "https://boxicons.com/",
+        explanation: "Boxicons offers a simple vector icon set designed for modern projects, suitable for both developers and designers.",
+        example: "boxicons-example.html"
+      },
+
+      // Layout & Drag/Drop Libraries
+      {
+        category: "layout-libraries",
+        title: "Masonry",
+        description: "A grid layout library using cascading grid layouts.",
+        docs: "https://masonry.desandro.com/",
+        explanation: "Masonry arranges elements in a cascading grid layout, giving a dynamic, brick-like appearance.",
+        example: "masonry-example.html"
+      },
+      {
+        category: "layout-libraries",
+        title: "Isotope",
+        description: "A library for filtering and sorting layouts.",
+        docs: "https://isotope.metafizzy.co/",
+        explanation: "Isotope provides filtering and sorting capabilities for grid layouts, allowing for dynamic and interactive content displays.",
+        example: "isotope-example.html"
+      },
+      {
+        category: "layout-libraries",
+        title: "Gridstack.js",
+        description: "A grid-based drag-and-drop library.",
+        docs: "https://gridstackjs.com/",
+        explanation: "Gridstack.js makes it easy to create drag-and-drop dashboard layouts using a flexible, responsive grid system.",
+        example: "gridstackjs-example.html"
+      },
+      {
+        category: "layout-libraries",
+        title: "Draggable & Sortable.js",
+        description: "Libraries to add drag-and-drop functionality.",
+        docs: "https://shopify.github.io/draggable/",
+        explanation: "Draggable & Sortable.js provide solutions for implementing drag-and-drop functionality to reorder elements interactively.",
+        example: "draggable-sortablejs-example.html"
+      },
+
+      // 3D & WebGL Libraries
+      {
+        category: "3d-libraries",
+        title: "Three.js",
+        description: "A library for creating 3D graphics using WebGL.",
+        docs: "https://threejs.org/docs/",
+        explanation: "Three.js is a popular library for creating 3D graphics in the browser using WebGL, offering a comprehensive API for detailed control.",
+        example: "threejs-example.html"
+      },
+      {
+        category: "3d-libraries",
+        title: "Babylon.js",
+        description: "A powerful 3D engine for web applications.",
+        docs: "https://doc.babylonjs.com/",
+        explanation: "Babylon.js is a powerful 3D engine designed for building interactive and realistic web applications with high performance.",
+        example: "babylonjs-example.html"
+      },
+      {
+        category: "3d-libraries",
+        title: "A-Frame",
+        description: "A web framework for building virtual reality experiences.",
+        docs: "https://aframe.io/docs/",
+        explanation: "A-Frame is a web framework that simplifies the creation of virtual reality experiences using HTML-like elements for 3D scenes.",
+        example: "aframe-example.html"
+      },
+
+      // Map Libraries
+      {
+        category: "map-libraries",
+        title: "Leaflet",
+        description: "An open-source JavaScript library for mobile-friendly interactive maps.",
+        docs: "https://leafletjs.com/",
+        explanation: "Leaflet is designed for simplicity, performance, and ease of integration with various map providers.",
+        example: "leaflet-example.html"
+      },
+      {
+        category: "map-libraries",
+        title: "OpenLayers",
+        description: "A high-performance library for dynamic mapping applications.",
+        docs: "https://openlayers.org/",
+        explanation: "OpenLayers offers extensive tools for building complex mapping applications and supports a wide range of data formats.",
+        example: "openlayer-example.html"
+      },
+
+      // Utility Libraries
+      {
+        category: "utility-libraries",
+        title: "Sass/SCSS",
+        description: "A CSS preprocessor for writing powerful, maintainable CSS.",
+        docs: "https://sass-lang.com/documentation",
+        explanation: "Sass/SCSS adds features like variables and nesting to CSS, making it easier to organize and maintain stylesheets.",
+        example: "sass-example.html"
+      },
+      {
+        category: "utility-libraries",
+        title: "Less",
+        description: "A CSS preprocessor which extends CSS with dynamic behavior.",
+        docs: "http://lesscss.org/",
+        explanation: "Less is a dynamic CSS preprocessor that allows the use of variables and functions to streamline style development.",
+        example: "less-example.html"
+      },
+      {
+        category: "utility-libraries",
+        title: "PostCSS",
+        description: "A tool for transforming CSS with JavaScript.",
+        docs: "https://postcss.org/docs/",
+        explanation: "PostCSS is a tool for transforming CSS with JavaScript plugins, automating tasks like adding vendor prefixes and optimizing code.",
+        example: "postcss-example.html"
+      }
+    ];
+
+    // --- Function to create a card for each library ---
+    function createCard(lib) {
+      const container = document.getElementById(lib.category);
+      if (container) {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        // Title and Description
+        const title = document.createElement("h3");
+        title.textContent = lib.title;
+        const desc = document.createElement("p");
+        desc.textContent = lib.description;
+        
+        // Explanation paragraph
+        const explain = document.createElement("p");
+        explain.className = "explanation";
+        explain.textContent = lib.explanation;
+
+        // Documentation Button
+        const docsBtn = document.createElement("a");
+        docsBtn.href = lib.docs;
+        docsBtn.target = "_blank";
+        docsBtn.className = "btn";
+        docsBtn.textContent = "Documentation";
+
+        // Example Button
+        const exampleBtn = document.createElement("a");
+        exampleBtn.href = lib.example;
+        exampleBtn.className = "btn btn-example";
+        exampleBtn.textContent = "Example";
+
+        // Append elements to the card
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(explain);
+        card.appendChild(docsBtn);
+        card.appendChild(exampleBtn);
+
+        container.appendChild(card);
+      }
+    }
+
+    // --- Create cards for all libraries ---
+    function createCards() {
+      libraries.forEach(lib => {
+        createCard(lib);
+      });
+    }
+
+    // Initialize cards on page load
+    createCards();
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gridstack.js Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@7.2.1/dist/gridstack.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: sans-serif;
+      background: #f8f8f8;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .grid-stack {
+      background: #e0e0e0;
+      min-height: 600px;
+    }
+    .grid-stack-item-content {
+      background: #007BFF;
+      color: white;
+      text-align: center;
+      font-size: 1.2em;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gridstack.js Example</h1>
+  <div class="grid-stack"></div>
+  <!-- تحميل مكتبة GridStack.js -->
+  <script src="https://cdn.jsdelivr.net/npm/gridstack@7.2.1/dist/gridstack-all.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("GridStack:", GridStack);
+      const gridEl = document.querySelector('.grid-stack');
+      const grid = GridStack.init({
+        cellHeight: 80,
+        disableOneColumnMode: true
+      }, gridEl);
+      console.log("GridStack instance:", grid);
+      grid.addWidget(`
+        <div class="grid-stack-item" gs-x="0" gs-y="0" gs-w="2" gs-h="2">
+          <div class="grid-stack-item-content">Item 1</div>
+        </div>
+      `);
+      grid.addWidget(`
+        <div class="grid-stack-item" gs-x="2" gs-y="0" gs-w="2" gs-h="4">
+          <div class="grid-stack-item-content">Item 2</div>
+        </div>
+      `);
+      grid.addWidget(`
+        <div class="grid-stack-item" gs-x="4" gs-y="0" gs-w="2" gs-h="2">
+          <div class="grid-stack-item-content">Item 3</div>
+        </div>
+      `);
+      grid.addWidget(`
+        <div class="grid-stack-item" gs-x="0" gs-y="2" gs-w="2" gs-h="2">
+          <div class="grid-stack-item-content">Item 4</div>
+        </div>
+      `);
+      grid.addWidget(`
+        <div class="grid-stack-item" gs-x="2" gs-y="4" gs-w="4" gs-h="2">
+          <div class="grid-stack-item-content">Item 5</div>
+        </div>
+      `);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Three.js Example</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Three.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.146.0/build/three.min.js"></script>
+  <script>
+    // 1. Create a Scene
+    const scene = new THREE.Scene();
+
+    // 2. Create a Camera
+    const camera = new THREE.PerspectiveCamera(
+      75, // Field of View
+      window.innerWidth / window.innerHeight, // Aspect Ratio
+      0.1, // Near Clipping Plane
+      1000 // Far Clipping Plane
+    );
+    camera.position.z = 5; // Move the camera back
+
+    // 3. Create a Renderer
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight); // Set renderer size
+    document.body.appendChild(renderer.domElement); // Add renderer to the DOM
+
+    // 4. Create a Cube
+    const geometry = new THREE.BoxGeometry(); // Cube geometry
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green material
+    const cube = new THREE.Mesh(geometry, material); // Create mesh
+    scene.add(cube); // Add cube to the scene
+
+    // 5. Handle Window Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight; // Update camera aspect ratio
+      camera.updateProjectionMatrix(); // Update camera projection
+      renderer.setSize(window.innerWidth, window.innerHeight); // Update renderer size
+    });
+
+    // 6. Animation Loop
+    function animate() {
+      requestAnimationFrame(animate); // Request next frame
+
+      // Rotate the cube
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      renderer.render(scene, camera); // Render the scene
+    }
+
+    animate(); // Start the animation loop
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snap.svg Example</title>
+  <!-- Include Snap.svg from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      height: 100vh; 
+      background: #f0f0f0;
+    }
+    svg { border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <!-- SVG container -->
+  <svg id="svgCanvas" width="600" height="400"></svg>
+  <script>
+    // Initialize Snap.svg
+    var s = Snap("#svgCanvas");
+
+    // Create a rectangle as a background
+    var bg = s.rect(0, 0, 600, 400).attr({ fill: "#fafafa" });
+    
+    // Create an interactive circle
+    var circle = s.circle(300, 200, 50).attr({
+      fill: "#ffcc00",
+      stroke: "#333",
+      strokeWidth: 3
+    });
+    
+    // Animate the circle on hover: increase radius and change color
+    circle.hover(
+      function() {
+        this.animate({ r: 70, fill: "#ff6600" }, 500, mina.easein);
+      },
+      function() {
+        this.animate({ r: 50, fill: "#ffcc00" }, 500, mina.easeout);
+      }
+    );
+    
+    // Create a wave-like path
+    var wavePath = "M0,300 Q150,200 300,300 T600,300";
+    var path = s.path(wavePath).attr({
+      fill: "none",
+      stroke: "#007BFF",
+      strokeWidth: 4
+    });
+    
+    // Animate the wave to simulate movement
+    function animateWave() {
+      path.animate({ d: "M0,300 Q150,250 300,300 T600,300" }, 1000, mina.easeinout, function() {
+        path.animate({ d: wavePath }, 1000, mina.easeinout, animateWave);
+      });
+    }
+    animateWave();
+  </script>
+</body>
+</html>

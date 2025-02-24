@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bulma Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <style>
+    .sidebar {
+      background-color: #363636;
+      color: white;
+      padding: 20px;
+    }
+    .main-content {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="columns">
+    <div class="column is-2 sidebar">
+      <h3 class="title is-4 has-text-white">Dashboard</h3>
+      <aside class="menu">
+        <ul class="menu-list">
+          <li><a class="is-active">Home</a></li>
+          <li><a>Profile</a></li>
+          <li><a>Settings</a></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="column main-content">
+      <h1 class="title">Welcome to the Dashboard</h1>
+      <button class="button is-primary">Click Me</button>
+    </div>
+  </div>
+</body>
+</html>

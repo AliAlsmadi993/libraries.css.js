@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chart.js Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin: 20px; font-family: sans-serif; text-align: center; }
+    canvas { max-width: 800px; margin: auto; }
+  </style>
+</head>
+<body>
+  <h1>Chart.js Example: Dynamic Line Chart</h1>
+  <canvas id="myChart"></canvas>
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    let labels = Array.from({length: 10}, (_, i) => i + 1);
+    let data = Array.from({length: 10}, () => Math.random() * 100);
+    
+    const config = {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Random Data',
+          data: data,
+          borderColor: 'blue',
+          backgroundColor: 'rgba(0,0,255,0.1)',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 1000 }
+      }
+    };
+    
+    const myChart = new Chart(ctx, config);
+    
+    function updateChart() {
+      config.data.datasets[0].data = Array.from({length: 10}, () => Math.random() * 100);
+      myChart.update();
+    }
+    
+    setInterval(updateChart, 2000);
+  </script>
+</body>
+</html>

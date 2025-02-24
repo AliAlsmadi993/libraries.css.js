@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Isotope Example</title>
+  <!-- Include Isotope from CDN -->
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f8f8f8;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    h1 { margin-bottom: 20px; }
+    .filters { margin-bottom: 20px; }
+    .filters button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .grid {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .grid-item {
+      width: 300px;
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Isotope Example</h1>
+  <div class="filters">
+    <button data-filter="*">Show All</button>
+    <button data-filter=".red">Red</button>
+    <button data-filter=".blue">Blue</button>
+  </div>
+  <div class="grid">
+    <div class="grid-item red">Red Item 1</div>
+    <div class="grid-item blue">Blue Item 2</div>
+    <div class="grid-item red">Red Item 3</div>
+    <div class="grid-item blue">Blue Item 4</div>
+    <div class="grid-item red">Red Item 5</div>
+    <div class="grid-item blue">Blue Item 6</div>
+  </div>
+  <script src="https://unpkg.com/desandro-matches-selector@2/matches-selector.min.js"></script>
+  <script>
+    var iso = new Isotope( '.grid', {
+      itemSelector: '.grid-item',
+      layoutMode: 'masonry'
+    });
+    // Bind filter button click
+    var filtersElem = document.querySelector('.filters');
+    filtersElem.addEventListener( 'click', function( event ) {
+      if ( !matchesSelector( event.target, 'button' ) ) return;
+      var filterValue = event.target.getAttribute('data-filter');
+      iso.arrange({ filter: filterValue });
+    });
+  </script>
+</body>
+</html>

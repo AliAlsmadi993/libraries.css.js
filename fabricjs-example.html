@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fabric.js Interactive Example - Alternative</title>
+  <!-- Include Fabric.js from an alternative CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/fabric@4.6.0/dist/fabric.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #controls {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px 10px 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #canvas-container {
+      border: 2px solid #ccc;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fabric.js Interactive Example - Alternative</h1>
+  <div id="controls">
+    <button id="addRectangle">Add Rectangle</button>
+    <button id="addCircle">Add Circle</button>
+    <button id="animateAll">Animate All</button>
+    <button id="clearCanvas">Clear Canvas</button>
+  </div>
+  <div id="canvas-container">
+    <canvas id="c" width="800" height="600"></canvas>
+  </div>
+  <script>
+    window.onload = function() {
+      // Initialize Fabric.js canvas
+      var canvas = new fabric.Canvas('c');
+      canvas.setBackgroundColor('#ffffff', canvas.renderAll.bind(canvas));
+      
+      // Utility function to generate a random hex color
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+      
+      // Add a random rectangle to the canvas
+      document.getElementById('addRectangle').addEventListener('click', function() {
+        var rect = new fabric.Rect({
+          left: Math.random() * (canvas.width - 100),
+          top: Math.random() * (canvas.height - 60),
+          fill: getRandomColor(),
+          width: 100,
+          height: 60,
+          angle: Math.random() * 90,
+          opacity: 0.8
+        });
+        canvas.add(rect);
+        canvas.renderAll();
+        console.log("Rectangle added");
+      });
+      
+      // Add a random circle to the canvas
+      document.getElementById('addCircle').addEventListener('click', function() {
+        var circle = new fabric.Circle({
+          left: Math.random() * (canvas.width - 80),
+          top: Math.random() * (canvas.height - 80),
+          fill: getRandomColor(),
+          radius: 40,
+          opacity: 0.8
+        });
+        canvas.add(circle);
+        canvas.renderAll();
+        console.log("Circle added");
+      });
+      
+      // Animate all objects on the canvas
+      document.getElementById('animateAll').addEventListener('click', function() {
+        var objects = canvas.getObjects();
+        if(objects.length === 0) {
+          console.log("No objects to animate.");
+          return;
+        }
+        objects.forEach(function(obj) {
+          var newLeft = Math.random() * (canvas.width - (obj.width || 100));
+          var newTop = Math.random() * (canvas.height - (obj.height || 100));
+          obj.animate('left', newLeft, {
+            duration: 1000,
+            onChange: canvas.renderAll.bind(canvas),
+            easing: fabric.util.ease.easeInOutQuad
+          });
+          obj.animate('top', newTop, {
+            duration: 1000,
+            onChange: canvas.renderAll.bind(canvas),
+            easing: fabric.util.ease.easeInOutQuad
+          });
+          obj.animate('opacity', Math.random(), {
+            duration: 1000,
+            onChange: canvas.renderAll.bind(canvas),
+            easing: fabric.util.ease.easeInOutQuad
+          });
+        });
+        console.log("Animation triggered");
+      });
+      
+      // Clear the canvas and reset the background
+      document.getElementById('clearCanvas').addEventListener('click', function() {
+        canvas.clear();
+        canvas.setBackgroundColor('#ffffff', canvas.renderAll.bind(canvas));
+        console.log("Canvas cleared");
+      });
+    }
+  </script>
+</body>
+</html>

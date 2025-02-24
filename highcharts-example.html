@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Highcharts Example</title>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <style>
+    body { margin: 20px; font-family: sans-serif; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Highcharts Example: Dynamic Line Chart</h1>
+  <div id="container" style="width: 800px; height: 400px; margin: auto;"></div>
+  <script>
+    Highcharts.chart('container', {
+      chart: { type: 'line' },
+      title: { text: 'Dynamic Data' },
+      xAxis: { categories: Array.from({length: 10}, (_, i) => i + 1) },
+      series: [{
+        name: 'Random Data',
+        data: Array.from({length: 10}, () => Math.random() * 100)
+      }]
+    });
+    
+    setInterval(function(){
+      var chart = Highcharts.charts[0];
+      if(chart) {
+        var newData = Array.from({length: 10}, () => Math.random() * 100);
+        chart.series[0].setData(newData, true);
+      }
+    }, 2000);
+  </script>
+</body>
+</html>

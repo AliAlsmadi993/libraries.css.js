@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Clone - EV Charging Stations</title>
+
+    <!-- Leaflet Maps Styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        #map { height: 100vh; width: 100%; }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+            width: 60%;
+            justify-content: space-between;
+        }
+        #destination-input {
+            width: 50%;
+            padding: 5px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+        #start-navigation, #locate-me, #toggle-language {
+            padding: 5px 10px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #next-instruction {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            display: none;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Control bar for search and buttons -->
+    <div id="controls">
+        <input type="text" id="destination-input" placeholder="Search for a destination or charging station...">
+        <button id="start-navigation">Start</button>
+        <button id="locate-me">📍 My Location</button>
+        <button id="toggle-language">🔊 Arabic</button>
+    </div>
+
+    <!-- Map container -->
+    <div id="map"></div>
+
+    <!-- Next navigation instruction -->
+    <div id="next-instruction">Next direction will appear here...</div>
+
+    <script>
+        let map = L.map('map').setView([31.963158, 35.930359], 15);
+        let userMarker, userLocation, routingControl, instructionsList = [];
+        let speechSynthesis = window.speechSynthesis;
+        let lastSpokenStepIndex = -1;
+        let voiceLanguage = "ar-SA"; // Default to Arabic voice
+        let nextInstruction = document.getElementById("next-instruction");
+
+        // Load OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Define charging stations
+        let stations = [
+            { id: 1, name: "Abdoun Station", lat: 31.9496, lng: 35.8934 },
+            { id: 2, name: "Marj Al-Hamam Station", lat: 31.9158, lng: 35.8562 },
+            { id: 3, name: "Mecca Street Station", lat: 31.9784, lng: 35.8554 }
+        ];
+
+        let stationMarkers = {};
+
+        // Add charging stations to the map
+        stations.forEach(station => {
+            let marker = L.marker([station.lat, station.lng]).addTo(map)
+                .bindPopup(`
+                    <strong>${station.name}</strong> <br>
+                    🔌 Sockets: 4 <br>
+                    ⚡ Charging Level: Level 3 <br>
+                    🕒 Open: 24/7 <br>
+                    <button onclick="navigateToStation(${station.lat}, ${station.lng})">🔍 Start Navigation</button>
+                `);
+            
+            stationMarkers[station.name.toLowerCase()] = { lat: station.lat, lng: station.lng, marker };
+        });
+
+        // Get user's location
+        function trackUserLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.watchPosition(position => {
+                    userLocation = [position.coords.latitude, position.coords.longitude];
+
+                    if (!userMarker) {
+                        userMarker = L.marker(userLocation).addTo(map)
+                            .bindPopup("📍 Your Location").openPopup();
+                    } else {
+                        userMarker.setLatLng(userLocation);
+                    }
+
+                    map.setView(userLocation, 17);
+
+                    if (routingControl) {
+                        checkProximity(userLocation);
+                    }
+                }, error => {
+                    alert("⚠️ Unable to get your location. Please enable location services.");
+                }, {
+                    enableHighAccuracy: true,
+                    timeout: 10000
+                });
+            } else {
+                alert("⚠️ Your browser does not support location tracking.");
+            }
+        }
+
+        document.getElementById("locate-me").addEventListener("click", trackUserLocation);
+        trackUserLocation();
+
+        // Function to trigger voice guidance
+        function speak(text) {
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = voiceLanguage;
+            speechSynthesis.speak(utterance);
+        }
+
+        // Function to navigate to a given destination
+        function navigateToDestination(destination) {
+            if (!userLocation) {
+                alert("⚠️ Please enable location services first.");
+                return;
+            }
+
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(userLocation[0], userLocation[1]),
+                    L.latLng(destination[0], destination[1])
+                ],
+                routeWhileDragging: false,
+                lineOptions: { styles: [{ color: 'blue', weight: 6 }] },
+                createMarker: function() { return null; }
+            }).addTo(map);
+
+            routingControl.on('routesfound', function (e) {
+                instructionsList = e.routes[0].instructions;
+                lastSpokenStepIndex = -1;
+            });
+
+            setInterval(() => checkProximity(userLocation), 2000);
+        }
+
+        function navigateToStation(lat, lng) {
+            navigateToDestination([lat, lng]);
+        }
+
+        document.getElementById("start-navigation").addEventListener("click", function() {
+            let destination = document.getElementById("destination-input").value;
+            if (destination && stationMarkers[destination.toLowerCase()]) {
+                navigateToDestination([stationMarkers[destination.toLowerCase()].lat, stationMarkers[destination.toLowerCase()].lng]);
+            } else {
+                alert("⚠️ Destination not found.");
+            }
+        });
+
+        document.getElementById("toggle-language").addEventListener("click", function() {
+            voiceLanguage = voiceLanguage === "ar-SA" ? "en-US" : "ar-SA";
+            this.innerText = voiceLanguage === "ar-SA" ? "🔊 Arabic" : "🔊 English";
+        });
+
+    </script>
+
+</body>
+</html>

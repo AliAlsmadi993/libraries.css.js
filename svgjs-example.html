@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG.js Example</title>
+  <!-- Include SVG.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.1/svg.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f4f4;
+    }
+    #drawing { border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <!-- Container for the SVG drawing -->
+  <div id="drawing"></div>
+  <script>
+    // Initialize SVG drawing area
+    var draw = SVG().addTo('#drawing').size(600, 400);
+    
+    // Create a rectangle and animate its rotation continuously
+    var rect = draw.rect(200, 100).attr({ fill: '#00aaff', x: 200, y: 150 });
+    rect.animate(3000, '<>').rotate(360).loop();
+    
+    // Create an interactive circle that toggles color on click
+    var circle = draw.circle(80).attr({ fill: '#ffcc00', cx: 100, cy: 100 });
+    circle.click(function() {
+      this.animate(500).attr({ fill: '#ff6600' }).animate(500).attr({ fill: '#ffcc00' });
+    });
+    
+    // Create a path with a stroke-dash effect that animates to simulate drawing
+    var path = draw.path("M50,350 Q150,250 250,350 T450,350")
+                   .attr({ fill: 'none', stroke: '#333', strokeWidth: 4, "stroke-dasharray": 500, "stroke-dashoffset": 500 });
+    path.animate(4000).attr({ "stroke-dashoffset": 0 });
+  </script>
+</body>
+</html>
